@@ -37,6 +37,83 @@ const products = [
         duration: "182天",
         min_amount: 10000,
         description: "固定收益增强策略，追求稳健收益"
+    },
+    {
+        id: 4,
+        name: "招银理财日日盈现金管理类产品",
+        bank: "招银理财",
+        return_rate: 3.2,
+        risk_level: "低风险",
+        type: "货币型",
+        duration: "活期",
+        min_amount: 1000,
+        description: "低风险现金管理产品，资金随存随取"
+    },
+    {
+        id: 5,
+        name: "光大理财阳光金步步高净值型理财",
+        bank: "光大理财",
+        return_rate: 5.1,
+        risk_level: "中高风险",
+        type: "权益增强",
+        duration: "540天",
+        min_amount: 100000,
+        description: "权益投资增强策略，追求较高收益"
+    },
+    {
+        id: 6,
+        name: "建信理财龙鑫固收增强型产品",
+        bank: "建信理财",
+        return_rate: 4.3,
+        risk_level: "中等风险",
+        type: "固收增强",
+        duration: "270天",
+        min_amount: 50000,
+        description: "建设银行旗下理财公司精品，稳健增值"
+    },
+    {
+        id: 7,
+        name: "中银理财智富权益精选产品",
+        bank: "中银理财",
+        return_rate: 5.8,
+        risk_level: "中高风险",
+        type: "权益型",
+        duration: "720天",
+        min_amount: 200000,
+        description: "精选优质权益资产，长期投资价值显著"
+    },
+    {
+        id: 8,
+        name: "交银理财稳享利率债券型产品",
+        bank: "交银理财",
+        return_rate: 3.8,
+        risk_level: "低风险",
+        type: "债券型",
+        duration: "180天",
+        min_amount: 20000,
+        description: "专注利率债券投资，风险可控收益稳定"
+    },
+    {
+        id: 9,
+        name: "农银理财安心快线现金管理",
+        bank: "农银理财",
+        return_rate: 3.0,
+        risk_level: "低风险",
+        type: "货币型",
+        duration: "活期",
+        min_amount: 100,
+        description: "超低门槛现金管理，适合日常资金周转"
+    },
+    {
+        id: 10,
+        name: "兴银理财添利宝稳健增长产品",
+        bank: "兴银理财",
+        return_rate: 4.4,
+        risk_level: "中等风险",
+        type: "混合型",
+        duration: "450天",
+        min_amount: 80000,
+        description: "债券股票混合配置，平衡风险与收益"
     }
 ];
 
@@ -136,12 +213,12 @@ function generateHTML() {
         <!-- 导航菜单 -->
         <nav class="navigation">
             <div class="nav-menu">
-                <a href="#" class="nav-item active" onclick="showSection('dashboard')">📊 仪表盘</a>
-                <a href="#" class="nav-item" onclick="showSection('products')">💰 产品管理</a>
-                <a href="#" class="nav-item" onclick="showSection('reports')">📈 每日报告</a>
-                <a href="#" class="nav-item" onclick="showSection('insights')">🔍 同频数扰</a>
-                <a href="#" class="nav-item" onclick="showSection('news')">📰 金融资讯</a>
-                <a href="#" class="nav-item" onclick="showSection('market')">🌐 市场概览</a>
+                <a href="javascript:void(0)" class="nav-item active" onclick="showSection('dashboard')">📊 仪表盘</a>
+                <a href="javascript:void(0)" class="nav-item" onclick="showSection('products')">💰 产品管理</a>
+                <a href="javascript:void(0)" class="nav-item" onclick="showSection('reports')">📈 每日报告</a>
+                <a href="javascript:void(0)" class="nav-item" onclick="showSection('insights')">🔍 同频数扰</a>
+                <a href="javascript:void(0)" class="nav-item" onclick="showSection('news')">📰 金融资讯</a>
+                <a href="javascript:void(0)" class="nav-item" onclick="showSection('market')">🌐 市场概览</a>
             </div>
         </nav>
 
@@ -158,8 +235,8 @@ function generateHTML() {
                 <div class="stat-label">高收益产品</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">${products.filter(p => p.risk_level === '中等风险').length}</div>
-                <div class="stat-label">中等风险产品</div>
+                <div class="stat-number">${products.filter(p => p.risk_level === '低风险').length}</div>
+                <div class="stat-label">低风险产品</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">在线</div>
@@ -308,10 +385,18 @@ function generateHTML() {
             navItems.forEach(item => item.classList.remove('active'));
             
             // 显示目标部分
-            document.getElementById(sectionId).classList.add('active');
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
             
             // 激活对应的导航项
-            event.target.classList.add('active');
+            const clickedNav = document.querySelector(`[onclick="showSection('${sectionId}')"]`);
+            if (clickedNav) {
+                clickedNav.classList.add('active');
+            }
+            
+            return false; // 防止默认链接行为
         }
         
         function showAddProduct() {
