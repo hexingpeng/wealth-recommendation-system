@@ -99,6 +99,19 @@ function generateHTML() {
             padding: 10px 18px; border-radius: 25px; font-size: 12px; font-weight: 600;
             box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
         }
+        .navigation { margin-bottom: 30px; }
+        .nav-menu { display: flex; background: white; border-radius: 15px; padding: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); overflow-x: auto; }
+        .nav-item { padding: 12px 20px; margin: 0 5px; border-radius: 10px; text-decoration: none; color: #666; font-weight: 500; transition: all 0.3s ease; white-space: nowrap; }
+        .nav-item:hover, .nav-item.active { background: #667eea; color: white; }
+        .section { display: none; }
+        .section.active { display: block; }
+        .management-content { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .feature-list { list-style: none; padding: 0; }
+        .feature-list li { padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+        .report-item, .news-item, .market-data { background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 15px; }
+        .news-time { color: #999; font-size: 0.9em; }
+        .btn-primary { background: #22c55e; }
+        .btn-primary:hover { background: #16a34a; }
         @media (max-width: 768px) {
             .cloud-badge { position: static; margin: 15px auto; display: block; width: fit-content; }
             .stats { grid-template-columns: 1fr 1fr; gap: 15px; }
@@ -106,6 +119,8 @@ function generateHTML() {
             .products-table th, .products-table td { padding: 12px 10px; }
             .header h1 { font-size: 2em; }
             .container { padding: 20px 15px; }
+            .nav-menu { justify-content: flex-start; }
+            .nav-item { padding: 10px 15px; font-size: 0.9em; }
         }
     </style>
 </head>
@@ -118,6 +133,20 @@ function generateHTML() {
     </div>
     
     <div class="container">
+        <!-- 导航菜单 -->
+        <nav class="navigation">
+            <div class="nav-menu">
+                <a href="#" class="nav-item active" onclick="showSection('dashboard')">📊 仪表盘</a>
+                <a href="#" class="nav-item" onclick="showSection('products')">💰 产品管理</a>
+                <a href="#" class="nav-item" onclick="showSection('reports')">📈 每日报告</a>
+                <a href="#" class="nav-item" onclick="showSection('insights')">🔍 同频数扰</a>
+                <a href="#" class="nav-item" onclick="showSection('news')">📰 金融资讯</a>
+                <a href="#" class="nav-item" onclick="showSection('market')">🌐 市场概览</a>
+            </div>
+        </nav>
+
+        <!-- 仪表盘部分 -->
+        <div id="dashboard" class="section active">
         <!-- 统计卡片 -->
         <div class="stats">
             <div class="stat-card">
@@ -174,6 +203,83 @@ function generateHTML() {
                 </tbody>
             </table>
         </div>
+        </div>
+
+        <!-- 产品管理部分 -->
+        <div id="products" class="section">
+            <div class="section-header">
+                <h2 class="section-title">💰 产品管理</h2>
+                <button class="btn btn-primary" onclick="showAddProduct()">➕ 添加产品</button>
+            </div>
+            <div class="management-content">
+                <p>📋 产品管理功能正在开发中...</p>
+                <ul class="feature-list">
+                    <li>✅ 产品列表显示</li>
+                    <li>🔄 添加新产品</li>
+                    <li>🔄 编辑产品信息</li>
+                    <li>🔄 删除产品</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 每日报告部分 -->
+        <div id="reports" class="section">
+            <div class="section-header">
+                <h2 class="section-title">📈 每日报告</h2>
+            </div>
+            <div class="management-content">
+                <div class="report-item">
+                    <h3>📊 今日数据概览</h3>
+                    <p>• 访问量：1,245 次</p>
+                    <p>• 推荐成功率：78.5%</p>
+                    <p>• 热门产品：杭银理财幸福添利</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 同频数扰部分 -->
+        <div id="insights" class="section">
+            <div class="section-header">
+                <h2 class="section-title">🔍 同频数扰</h2>
+            </div>
+            <div class="management-content">
+                <p>🔍 智能分析功能开发中...</p>
+                <ul class="feature-list">
+                    <li>📊 用户行为分析</li>
+                    <li>🎯 个性化推荐</li>
+                    <li>📈 趋势预测</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 金融资讯部分 -->
+        <div id="news" class="section">
+            <div class="section-header">
+                <h2 class="section-title">📰 金融资讯</h2>
+            </div>
+            <div class="management-content">
+                <div class="news-item">
+                    <h3>💰 理财市场最新动态</h3>
+                    <p>央行最新政策对理财产品收益率的影响分析...</p>
+                    <span class="news-time">2025-09-05 15:30</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 市场概览部分 -->
+        <div id="market" class="section">
+            <div class="section-header">
+                <h2 class="section-title">🌐 市场概览</h2>
+            </div>
+            <div class="management-content">
+                <div class="market-data">
+                    <h3>📈 市场指标</h3>
+                    <p>• 理财产品平均收益率：4.2%</p>
+                    <p>• 银行理财规模：¥29.5万亿</p>
+                    <p>• 风险偏好：中等风险占67%</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -190,6 +296,26 @@ function generateHTML() {
             } catch (error) {
                 alert('网络错误，请稍后重试');
             }
+        }
+        
+        function showSection(sectionId) {
+            // 隐藏所有部分
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // 移除所有导航项的活跃状态
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            // 显示目标部分
+            document.getElementById(sectionId).classList.add('active');
+            
+            // 激活对应的导航项
+            event.target.classList.add('active');
+        }
+        
+        function showAddProduct() {
+            alert('添加产品功能开发中...\n\n将支持：\n• 产品基本信息录入\n• 风险等级设置\n• 收益率配置\n• 产品描述编辑');
         }
     </script>
 </body>
